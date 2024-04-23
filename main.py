@@ -1,8 +1,3 @@
-# cd C:\Personal\AI_analytics\pythonProject\.venv\Scripts
-# (base) PS C:\Personal\AI_analytics\pythonProject\.venv\Scripts> .\Activate.ps1
-# (base) (.venv) PS C:\Personal\AI_analytics\pythonProject\.venv\Scripts> cd C:\Personal\AI_analytics\pythonProject
-# (base) (.venv) PS C:\Personal\AI_analytics\pythonProject> streamlit run main.py
-
 import re
 import warnings
 from collections import Counter
@@ -58,7 +53,6 @@ def preprocessor(data):
     return df, paragraph
 
 def fetch_stats(selected_user,df):
-
     if selected_user != "Overall":
         df = df[df['user'] == selected_user]
     # fetch the number of messages
@@ -75,7 +69,6 @@ def fetch_stats(selected_user,df):
     links = []
     for message in df['message']:
         links.extend(extract.find_urls(message))
-
     return num_messages,len(words),num_media_messages,len(links)
 
 
@@ -135,10 +128,6 @@ def sentiment_scores(sentence):
     }
     return sentiment_dict_percent
 
-
-
-
-
 st.markdown("""
 <style>
     [data-testid=stSidebar] {
@@ -182,15 +171,7 @@ if uploaded_file is not None:
             st.header("Links Shared")
             st.title(num_links)
 
-    #sentiment analysis
-    # st.title("Analyze Sentiment")
-    # sentiment_dict = sentiment_scores(paragraph)
-    # plt.bar(sentiment_dict.keys(), sentiment_dict.values(), color=['red', 'blue', 'green'])
-    # plt.title('Sentiment Analysis')
-    # plt.xlabel('Sentiment')
-    # plt.ylabel('Percentage')
-    # st.pyplot()
-
+    # Sentiment Analysis
     st.title("Analyze Sentiment")
     sentiment_dict = sentiment_scores(paragraph)
     fig, ax = plt.subplots()
@@ -200,7 +181,7 @@ if uploaded_file is not None:
     ax.set_ylabel('Percentage')
     st.pyplot(fig)
 
-    #timeline
+    # timeline
     st.title("Montly Timeline")
     timeline = monthly_timeline(selected_user, df)
     fig, ax = plt.subplots()
@@ -208,22 +189,13 @@ if uploaded_file is not None:
     plt.xticks(rotation='vertical')
     st.pyplot(fig)
 
-    # # daily timeline
-    # st.title("Daily Timeline")
-    # daily_timeline = daily_timeline(selected_user, df)
-    # fig, ax = plt.subplots()
-    # ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='black')
-    # plt.xticks(rotation='vertical')
-    # st.pyplot(fig)
-
+    
     # finding the busiest users in the group(Group level)
     if selected_user == 'Overall':
         st.title('Most Busy Users')
         x, new_df = most_active_user(df)
         fig, ax = plt.subplots()
-
         col1, col2 = st.columns(2)
-
         with col1:
             ax.bar(x.index, x.values, color='red')
             plt.xticks(rotation='vertical')
@@ -237,6 +209,7 @@ if uploaded_file is not None:
     wordcloud_image = df_wc.to_image()
     st.image(wordcloud_image, caption='Word Cloud')
 
+    # Most Common Words 
     st.title('Most Common Words')
     most_common_df = most_common_words(selected_user, df)
     col1, col2 = st.columns([1.5,3.5])
