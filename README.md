@@ -12,8 +12,6 @@ Hey all, I've created a Streamlit web app that analyzes WhatsApp chat data, offe
 
 **Step 3:** Click on "Show Analysis" to generate insights.
 
-![Web app Screenshot](https://github.com/AI-With-Sajid/AI_Chat_Analytics/blob/main/ai_chat_analytics_web-app.png)
-
 **Screenshots:**
 
 ![Web app Screenshot](https://github.com/AI-With-Sajid/AI_Chat_Analytics/blob/main/ai_chat_analytics_web-app.png)
